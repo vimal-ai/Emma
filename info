@@ -1,0 +1,4 @@
+Dataset : contain all dataset require in project with ne details necessary
+Demo : contain all demo file
+Documentation : contain documentation file of project
+Models : contain all model file genrated by training programs (.h5 file, .pickl file)
