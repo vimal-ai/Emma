@@ -1,34 +1,38 @@
+# import kivy module 
+import kivy
+
+# base Class of your App inherits from the App class. 
+# app:always refers to the instance of your application 
 from kivy.app import App
-from kivy.uix.button import Button
-from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.gridlayout import GridLayout
-from kivy.uix.label import Label
-from kivy.uix.textinput import TextInput
 
-class Emma(App):
+# it is to import Builder 
+from kivy.lang import Builder
+
+# this restrict the kivy version i.e 
+# below this kivy version you cannot use the app or software 
+# not coumpulsary to write it 
+kivy.require('1.9.1')
+
+# building kv file as string 
+kvfile = Builder.load_string(""" 
+Label: 
+    text: 
+        ('[b]Hello[/b] [color = ff0099]World[/color]\\n' 
+        '[color = ff0099]Hello[/color] [b]World[/b]\\n' 
+        '[b]Hello[/b] [color = ff0099]World:):)[/color]') 
+    markup: True 
+    font_size: '64pt' 
+""")
+
+
+# define the App class
+# and just pass rest write on kvfile 
+# not necessary to pass 
+# can also define function in it 
+class kvfileApp(App):
     def build(self):
-        root_widget = BoxLayout(orientation='vertical')
+        return kvfile
 
-        output_label = Label(size_hint_y=1)
 
-        button_symbols = ('1', '2', '3', '+',
-                          '4', '5', '6', '-',
-                          '7', '8', '9', '.',
-                          '0', '*', '/', '=')
-
-        #button_grid = GridLayout(cols=4, size_hint_y=2)
-        # for symbol in button_symbols:
-        #     button_grid.add_widget(Button(text=symbol))
-
-        textinput = TextInput(text='Hello world', size_hint_y = None, height = 30, multiline=False)
-
-        clear_button = Button(text='Listen', size_hint_y=None,
-                              height=50)
-
-        root_widget.add_widget(output_label)
-        root_widget.add_widget(textinput)
-        root_widget.add_widget(clear_button)
-
-        return root_widget
-
-Emma().run()
+kv = kvfileApp()
+kv.run() 
