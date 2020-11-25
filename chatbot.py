@@ -21,11 +21,11 @@ ps = PorterStemmer()
 """
 read model, word2vec and data file
 """
-filename = './models/nlu.sav'
+filename = './Models/ChatBot/nlu.sav'
 nlu = pickle.load(open(filename, 'rb'))
-filename = './models/word2vec.sav'
+filename = './Models/ChatBot/word2vec.sav'
 word2vec = pickle.load(open(filename, 'rb'))
-filename = './data/data.csv'
+filename = './Data/data.csv'
 df = pd.read_csv(filename)
 
 """
@@ -75,8 +75,11 @@ method for speek
 def speek(text):
     tts = gTTS(text= text, lang = "en")
     filename = "voice.mp3"
+    print("file")
     tts.save(filename)
+    print("gen")
     playsound.playsound(filename)
+    print("fin")
 
 """
 get input from mic
