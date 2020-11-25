@@ -8,7 +8,8 @@ import os
 import filePath
 from Memory import Memory
 
-import playsound
+import pyttsx3
+#from playsound import playsound
 import speech_recognition as sr
 from gtts import gTTS
 
@@ -78,7 +79,7 @@ def speek(text):
     print("file")
     tts.save(filename)
     print("gen")
-    playsound.playsound(filename)
+    os.system("play voice.mp3")
     print("fin")
 
 """
