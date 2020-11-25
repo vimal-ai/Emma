@@ -1,5 +1,6 @@
 import main
 import yoloLive
+import brightness_det as bd
 
 import threading
 import time
@@ -15,9 +16,12 @@ class myThread (threading.Thread):
        if(self.name=="mihir"):
            print_mihir()
            main.main()
-       else:
+       elif(self.name=="vimal"):
            yoloLive.main()
            print_vimal()
+       elif(self.name=='raxit'):
+           print("raxit")
+           bd.main()
 
 def print_vimal():
     print("vimal")
@@ -28,7 +32,9 @@ def print_mihir():
 # Create new threads
 thread1 = myThread("mihir")
 thread2 = myThread("vimal")
+#thread3 = myThread("raxit")
 
 # Start new Threads
 thread1.start()
 thread2.start()
+#thread3.start()

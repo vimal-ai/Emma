@@ -1,15 +1,15 @@
 """
 Import python packages
 """
-import subprocess
+
+from yoloLive import ObjectData
+
 from datetime import datetime
 import os
 
 import filePath
 from Memory import Memory
 
-import pyttsx3
-#from playsound import playsound
 import speech_recognition as sr
 from gtts import gTTS
 
