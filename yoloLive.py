@@ -3,7 +3,7 @@ import numpy as np
 import time
 from gtts import gTTS
 import os
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(1)
 #Load YOLO
 
 weights_path = "/home/vimal/Projects/Emma_models/yolov3.weights"
@@ -19,7 +19,6 @@ outputLayers = [layer_name[i[0] - 1] for i in net.getUnconnectedOutLayers()]
 colors = np.random.uniform(0,255,size=(len(classes), 3))
 
 #Loading image
-starting_time = time.time()
 
 
 Object_Detection_frame = []
@@ -36,8 +35,11 @@ def img_estim(frame, thrshld):
 
 def objectDetection():
     img_id = 0
+    fps = 0
 
-    while True:
+    while True:    
+        starting_time = time.time()
+
         #img = cv2.imread("img.png")
         ret, img = cap.read()
 
@@ -59,7 +61,7 @@ def objectDetection():
         height, width, channels = img.shape
 
         # detecting Image
-        blob = cv2.dnn.blobFromImage(img, 0.00392, (416, 416), (0, 0, 0), True, False)
+        blob = cv2.dnn.blobFromImage(img, 0.00392, (320, 320), (0, 0, 0), True, False)
 
         # for b in blob:
         #    for n, img_blob in enumerate(b):
@@ -129,11 +131,13 @@ def objectDetection():
         setHome(output)
 
         # Detecting Objects
-        elapsed_time = time.time() - starting_time
-        fps = img_id / elapsed_time
+
         cv2.putText(img, "FPS: " + str(round(fps, 2)), (10, 50), font, 1, (0, 0, 0), 1)
         cv2.imshow("Image", img)
         #cv2.imshow('image', img)
+        elapsed_time = time.time() - starting_time
+        fps = 1 / elapsed_time
+        
         if cv2.waitKey(1) & 0xFF == ord('q'):
             cap.release()
             cv2.destroyAllWindows()
@@ -161,11 +165,11 @@ def setHome(output):
 
     elif(flag==True and output=="dark"):
         print("light on")
-        speek("turnning light on")
+        #speek("turnning light on")
 
     elif(flag==False and output=="light"):
         print("light off")
-        speek("turnning light off")
+        #speek("turnning light off")
 
     elif(flag==False and output=="dark"):
         print("Nothing")
@@ -182,6 +186,12 @@ def speek(text):
 def main():
     objectDetection()
 
-if __name__ == "__main__":
+if __name__ == "__main__":	
+    od = ObjectData()
     main()
-od = ObjectData()
+    
+#od = ObjectData()
+
+
+
+
